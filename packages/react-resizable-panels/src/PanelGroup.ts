@@ -103,9 +103,7 @@ export type PanelGroupProps = Omit<
     dir?: "auto" | "ltr" | "rtl" | undefined;
   }>;
 
-const debounceMap: {
-  [key: string]: typeof savePanelGroupState;
-} = {};
+const debounceMap: Record<string, typeof savePanelGroupState> = {};
 
 function PanelGroupWithForwardedRef({
   autoSaveId = null,
@@ -553,7 +551,6 @@ function PanelGroupWithForwardedRef({
   );
 
   // (Re)calculate group layout whenever panels are registered or unregistered.
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useIsomorphicLayoutEffect(() => {
     if (eagerValuesRef.current.panelDataArrayChanged) {
       eagerValuesRef.current.panelDataArrayChanged = false;

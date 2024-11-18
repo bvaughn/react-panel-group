@@ -37,7 +37,9 @@ const {
 } = React;
 
 // `Math.random()` and `.slice(0, 5)` prevents bundlers from trying to `import { useId } from 'react'`
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const useId = (React as any)[
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   `useId${Math.random()}`.slice(0, 5)
 ] as () => string;
 

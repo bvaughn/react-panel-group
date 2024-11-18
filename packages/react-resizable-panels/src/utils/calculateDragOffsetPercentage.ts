@@ -23,7 +23,7 @@ export function calculateDragOffsetPercentage(
   const groupId = handleElement.getAttribute("data-panel-group-id");
   assert(groupId, `Resize handle element has no group id attribute`);
 
-  let { initialCursorPosition } = initialDragState;
+  const { initialCursorPosition } = initialDragState;
 
   const cursorPosition = getResizeEventCursorPosition(direction, event);
 

@@ -62,8 +62,9 @@ const props =
 
 /** @param {HTMLElement | SVGElement} node */
 function is_flex_item(node: HTMLElement | SVGElement) {
-  // @ts-ignore
-  const display = getComputedStyle(get_parent(node) ?? node).display;
+  const display = getComputedStyle(
+    // @ts-expect-error Forced type
+    get_parent(node) ?? node).display;
   return display === "flex" || display === "inline-flex";
 }
 
@@ -92,7 +93,7 @@ function creates_stacking_context(node: HTMLElement | SVGElement) {
   if ("webkitFilter" in style && style.webkitFilter !== "none") return true;
   if ("isolation" in style && style.isolation === "isolate") return true;
   if (props.test(style.willChange)) return true;
-  // @ts-expect-error
+  // @ts-expect-error webkitOverflowScrolling doesn't exist on style
   if (style.webkitOverflowScrolling === "touch") return true;
 
   return false;
@@ -113,7 +114,7 @@ function find_stacking_context(nodes: (HTMLElement | SVGElement)[]) {
 
 /** @param {HTMLElement | SVGElement} node */
 function get_z_index(node: HTMLElement | SVGElement | null) {
-  return (node && Number(getComputedStyle(node).zIndex)) || 0;
+  return (node && Number(getComputedStyle(node).zIndex)) ?? 0;
 }
 
 /** @param {HTMLElement} node */
@@ -122,8 +123,8 @@ function get_ancestors(node: HTMLElement | SVGElement | null) {
 
   while (node) {
     ancestors.push(node);
-    // @ts-ignore
-    node = get_parent(node);
+    // @ts-expect-error Forced type
+    node = get_parent(node) as Element;
   }
 
   return ancestors; // [ node, ... <body>, <html>, document ]

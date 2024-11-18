@@ -5,9 +5,9 @@ export function getPanelGroupElement(
   //If the root element is the PanelGroup
   if (
     rootElement instanceof HTMLElement &&
-    (rootElement as HTMLElement)?.dataset?.panelGroupId == id
+    rootElement?.dataset?.panelGroupId == id
   ) {
-    return rootElement as HTMLElement;
+    return rootElement;
   }
 
   //Else query children

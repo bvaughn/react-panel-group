@@ -91,7 +91,7 @@ export function useWindowSplitterPanelGroupBehavior({
     }
 
     return () => {
-      resizeHandleElements.forEach((resizeHandleElement, index) => {
+      resizeHandleElements.forEach((resizeHandleElement) => {
         resizeHandleElement.removeAttribute("aria-controls");
         resizeHandleElement.removeAttribute("aria-valuemax");
         resizeHandleElement.removeAttribute("aria-valuemin");
@@ -125,7 +125,7 @@ export function useWindowSplitterPanelGroupBehavior({
         panelGroupElement
       );
       if (idBefore == null || idAfter == null) {
-        return () => {};
+        return () => undefined;
       }
 
       const onKeyDown = (event: KeyboardEvent) => {

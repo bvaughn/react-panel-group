@@ -31,10 +31,10 @@ export const EXCEEDED_VERTICAL_MAX = 0b1000;
 
 const isCoarsePointer = getInputType() === "coarse";
 
-let intersectingHandles: ResizeHandlerData[] = [];
+const intersectingHandles: ResizeHandlerData[] = [];
 let isPointerDown = false;
-let ownerDocumentCounts: Map<Document, number> = new Map();
-let panelConstraintFlags: Map<string, number> = new Map();
+const ownerDocumentCounts = new Map<Document, number>();
+const panelConstraintFlags = new Map<string, number>();
 
 const registeredResizeHandlers = new Set<ResizeHandlerData>();
 

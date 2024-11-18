@@ -21,7 +21,7 @@ describe("PanelGroup", () => {
   }
 
   beforeEach(() => {
-    // @ts-expect-error
+    // @ts-expect-error global.IS_REACT_ACT_ENVIRONMENT is not typed
     global.IS_REACT_ACT_ENVIRONMENT = true;
 
     uninstallMockOffsetWidthAndHeight = mockPanelGroupOffsetWidthAndHeight();
@@ -447,9 +447,9 @@ describe("PanelGroup", () => {
         );
       });
 
-      let leftElement = getPanelElement("left", container);
-      let middleElement = getPanelElement("middle", container);
-      let rightElement = getPanelElement("right", container);
+      const leftElement = getPanelElement("left", container);
+      const middleElement = getPanelElement("middle", container);
+      const rightElement = getPanelElement("right", container);
       assert(leftElement, "");
       assert(middleElement, "");
       assert(rightElement, "");
@@ -499,9 +499,9 @@ describe("PanelGroup", () => {
         );
       });
 
-      let leftElement = getPanelElement("left", container);
-      let middleElement = getPanelElement("middle", container);
-      let rightElement = getPanelElement("right", container);
+      const leftElement = getPanelElement("left", container);
+      const middleElement = getPanelElement("middle", container);
+      const rightElement = getPanelElement("right", container);
       assert(leftElement, "");
       assert(middleElement, "");
       assert(rightElement, "");
@@ -539,9 +539,9 @@ describe("PanelGroup", () => {
         );
       });
 
-      let leftElement = getPanelElement("left", container);
-      let middleElement = getPanelElement("middle", container);
-      let rightElement = getPanelElement("right", container);
+      const leftElement = getPanelElement("left", container);
+      const middleElement = getPanelElement("middle", container);
+      const rightElement = getPanelElement("right", container);
       assert(leftElement, "");
       assert(middleElement, "");
       assert(rightElement, "");
@@ -579,9 +579,9 @@ describe("PanelGroup", () => {
         );
       });
 
-      let leftElement = getPanelElement("left", container);
-      let middleElement = getPanelElement("middle", container);
-      let rightElement = getPanelElement("right", container);
+      const leftElement = getPanelElement("left", container);
+      const middleElement = getPanelElement("middle", container);
+      const rightElement = getPanelElement("right", container);
       assert(leftElement, "");
       assert(middleElement, "");
       assert(rightElement, "");
@@ -610,8 +610,8 @@ describe("PanelGroup", () => {
   describe("callbacks", () => {
     describe("onCollapse", () => {
       it("should be called on mount if a panels initial size is 0", () => {
-        let onCollapseLeft = jest.fn();
-        let onCollapseRight = jest.fn();
+        const onCollapseLeft = jest.fn();
+        const onCollapseRight = jest.fn();
 
         act(() => {
           root.render(
@@ -628,9 +628,8 @@ describe("PanelGroup", () => {
       });
 
       it("should be called when a panel is collapsed", () => {
-        let onCollapse = jest.fn();
-
-        let panelRef = createRef<ImperativePanelHandle>();
+        const onCollapse = jest.fn();
+        const panelRef = createRef<ImperativePanelHandle>();
 
         act(() => {
           root.render(
@@ -652,9 +651,8 @@ describe("PanelGroup", () => {
       });
 
       it("should be called with collapsedSizes that have many decimal places", () => {
-        let onCollapse = jest.fn();
-
-        let panelRef = createRef<ImperativePanelHandle>();
+        const onCollapse = jest.fn();
+        const panelRef = createRef<ImperativePanelHandle>();
 
         act(() => {
           root.render(
@@ -692,8 +690,8 @@ describe("PanelGroup", () => {
 
     describe("onExpand", () => {
       it("should be called on mount if a collapsible panels initial size is not 0", () => {
-        let onExpandLeft = jest.fn();
-        let onExpandRight = jest.fn();
+        const onExpandLeft = jest.fn();
+        const onExpandRight = jest.fn();
 
         act(() => {
           root.render(
@@ -710,9 +708,8 @@ describe("PanelGroup", () => {
       });
 
       it("should be called when a collapsible panel is expanded", () => {
-        let onExpand = jest.fn();
-
-        let panelRef = createRef<ImperativePanelHandle>();
+        const onExpand = jest.fn();
+        const panelRef = createRef<ImperativePanelHandle>();
 
         act(() => {
           root.render(
@@ -739,9 +736,8 @@ describe("PanelGroup", () => {
       });
 
       it("should be called with collapsedSizes that have many decimal places", () => {
-        let onExpand = jest.fn();
-
-        let panelRef = createRef<ImperativePanelHandle>();
+        const onExpand = jest.fn();
+        const panelRef = createRef<ImperativePanelHandle>();
 
         act(() => {
           root.render(
@@ -780,9 +776,9 @@ describe("PanelGroup", () => {
 
     describe("onResize", () => {
       it("should be called on mount", () => {
-        let onResizeLeft = jest.fn();
-        let onResizeMiddle = jest.fn();
-        let onResizeRight = jest.fn();
+        const onResizeLeft = jest.fn();
+        const onResizeMiddle = jest.fn();
+        const onResizeRight = jest.fn();
 
         act(() => {
           root.render(
@@ -810,9 +806,9 @@ describe("PanelGroup", () => {
       });
 
       it("should be called when a panel is added or removed from the group", () => {
-        let onResizeLeft = jest.fn();
-        let onResizeMiddle = jest.fn();
-        let onResizeRight = jest.fn();
+        const onResizeLeft = jest.fn();
+        const onResizeMiddle = jest.fn();
+        const onResizeRight = jest.fn();
 
         act(() => {
           root.render(
@@ -907,8 +903,8 @@ describe("PanelGroup", () => {
     });
 
     it("should support sizes with many decimal places", () => {
-      let panelRef = createRef<ImperativePanelHandle>();
-      let onResize = jest.fn();
+      const onResize = jest.fn();
+      const panelRef = createRef<ImperativePanelHandle>();
 
       act(() => {
         root.render(
@@ -1029,19 +1025,18 @@ describe("PanelGroup", () => {
   });
 
   describe("DEV warnings", () => {
-    it("should warn about server rendered panels with no default size", () => {
+    it("should warn about server rendered panels with no default size", async () => {
       jest.resetModules();
       jest.mock("#is-browser", () => ({ isBrowser: false }));
 
-      const { TextEncoder } = require("util");
+      const { TextEncoder } = await import("util");
       global.TextEncoder = TextEncoder;
 
-      const { renderToStaticMarkup } = require("react-dom/server.browser");
-      const { act } = require("react-dom/test-utils");
-      const Panel = require("./Panel").Panel;
-      const PanelGroup = require("./PanelGroup").PanelGroup;
-      const PanelResizeHandle =
-        require("./PanelResizeHandle").PanelResizeHandle;
+      const { renderToStaticMarkup } = await import("react-dom/server");
+      const { act } = await import("react-dom/test-utils");
+      const { Panel } = await import("./Panel");
+      const { PanelGroup } = await import("./PanelGroup");
+      const { PanelResizeHandle } = await import("./PanelResizeHandle");
 
       act(() => {
         // No warning expected if default sizes provided

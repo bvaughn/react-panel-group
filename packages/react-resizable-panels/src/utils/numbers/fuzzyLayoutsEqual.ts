@@ -10,8 +10,10 @@ export function fuzzyLayoutsEqual(
   }
 
   for (let index = 0; index < actual.length; index++) {
-    const actualSize = actual[index] as number;
-    const expectedSize = expected[index] as number;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const actualSize = actual[index]!;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const expectedSize = expected[index]!;
 
     if (!fuzzyNumbersEqual(actualSize, expectedSize, fractionDigits)) {
       return false;

@@ -27,7 +27,7 @@ describe("PanelResizeHandle", () => {
   let container: HTMLElement;
 
   beforeEach(() => {
-    // @ts-expect-error
+    // @ts-expect-error global.IS_REACT_ACT_ENVIRONMENT is not typed
     global.IS_REACT_ACT_ENVIRONMENT = true;
     container = document.createElement("div");
     document.body.appendChild(container);

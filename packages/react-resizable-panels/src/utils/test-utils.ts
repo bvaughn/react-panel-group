@@ -1,6 +1,6 @@
 import { assert } from "./assert";
 
-const util = require("util");
+import util from "util";
 
 export function dispatchPointerEvent(type: string, target: HTMLElement) {
   const rect = target.getBoundingClientRect();
@@ -46,7 +46,7 @@ export function expectToBeCloseToArray(
 
       expect(actualNumber).toBeCloseTo(expectedNumber, 1);
     });
-  } catch (error) {
+  } catch (_) {
     expect(actualNumbers).toEqual(expectedNumbers);
   }
 }
@@ -98,8 +98,10 @@ export function mockPanelGroupOffsetWidthAndHeight(
   Object.defineProperty(HTMLElement.prototype, "offsetHeight", {
     configurable: true,
     get: function () {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       if (this.hasAttribute("data-resize-handle")) {
         return 0;
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       } else if (this.hasAttribute("data-panel-group")) {
         return mockHeight;
       }
@@ -109,8 +111,10 @@ export function mockPanelGroupOffsetWidthAndHeight(
   Object.defineProperty(HTMLElement.prototype, "offsetWidth", {
     configurable: true,
     get: function () {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       if (this.hasAttribute("data-resize-handle")) {
         return 0;
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       } else if (this.hasAttribute("data-panel-group")) {
         return mockWidth;
       }
@@ -153,15 +157,15 @@ export function verifyExpandedPanelGroupLayout(
 }
 
 export function verifyExpectedWarnings(
-  callback: Function,
+  callback: () => void,
   ...expectedMessages: string[]
 ) {
-  const consoleSpy = (format: any, ...args: any[]) => {
+  const consoleSpy = (format: unknown, ...args: unknown[]) => {
     const message = util.format(format, ...args);
 
     for (let index = 0; index < expectedMessages.length; index++) {
       const expectedMessage = expectedMessages[index];
-      if (message.includes(expectedMessage)) {
+      if (expectedMessage && message.includes(expectedMessage)) {
         expectedMessages.splice(index, 1);
         return;
       }

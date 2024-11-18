@@ -19,7 +19,7 @@ export function resizePanel({
     `Panel constraints not found for index ${panelIndex}`
   );
 
-  let {
+  const {
     collapsedSize = 0,
     collapsible,
     maxSize = 100,

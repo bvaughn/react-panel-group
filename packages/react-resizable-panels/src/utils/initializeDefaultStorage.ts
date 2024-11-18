@@ -21,6 +21,6 @@ export function initializeDefaultStorage(storageObject: PanelGroupStorage) {
     console.error(error);
 
     storageObject.getItem = () => null;
-    storageObject.setItem = () => {};
+    storageObject.setItem = () => undefined;
   }
 }

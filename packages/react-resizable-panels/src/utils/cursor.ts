@@ -9,7 +9,7 @@ import { getNonce } from "./csp";
 type CursorState = "horizontal" | "intersection" | "vertical";
 
 let currentCursorStyle: string | null = null;
-let enabled: boolean = true;
+let enabled = true;
 let styleElement: HTMLStyleElement | null = null;
 
 export function disableGlobalCursorStyles() {

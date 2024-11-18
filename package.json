@@ -29,15 +29,13 @@
     "@types/node": "^18.17.5",
     "@types/react": "latest",
     "@types/react-dom": "latest",
-    "@typescript-eslint/eslint-plugin": "^5.62.0",
-    "@typescript-eslint/parser": "^5.62.0",
-    "@typescript-eslint/type-utils": "^5.62.0",
-    "eslint": "^8.47.0",
+    "eslint": "^9.15.0",
     "parcel": "^2.9.3",
     "prettier": "latest",
     "process": "^0.11.10",
     "ts-jest": "^29.1.1",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "typescript-eslint": "^8.14.0"
   },
   "dependencies": {
     "@parcel/config-default": "^2.9.3",

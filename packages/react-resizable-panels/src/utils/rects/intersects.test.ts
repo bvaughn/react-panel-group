@@ -4,12 +4,12 @@ import { Rectangle } from "./types";
 const emptyRect = { x: 0, y: 0, width: 0, height: 0 };
 const rect = { x: 25, y: 25, width: 50, height: 50 };
 
-function forkRect(partial: Partial<Rectangle>, baseRect: Rectangle = rect) {
+function forkRect(partial: Partial<Rectangle>) {
   return { ...rect, ...partial };
 }
 
 describe("intersects", () => {
-  let strict: boolean = false;
+  let strict = false;
 
   function verify(rectOne: Rectangle, rectTwo: Rectangle, expected: boolean) {
     const actual = intersects(rectOne, rectTwo, strict);

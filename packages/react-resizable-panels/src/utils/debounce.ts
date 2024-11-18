@@ -1,10 +1,11 @@
-export default function debounce<T extends Function>(
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function debounce<T extends (...args: any[]) => void>(
   callback: T,
-  durationMs: number = 10
+  durationMs = 10
 ) {
   let timeoutId: NodeJS.Timeout | null = null;
 
-  let callable = (...args: any) => {
+  function callable(...args: unknown[]) {
     if (timeoutId !== null) {
       clearTimeout(timeoutId);
     }
@@ -12,7 +13,7 @@ export default function debounce<T extends Function>(
     timeoutId = setTimeout(() => {
       callback(...args);
     }, durationMs);
-  };
+  }
 
   return callable as unknown as T;
 }

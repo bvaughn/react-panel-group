@@ -1,6 +1,6 @@
 // @ts-expect-error This is an experimental API
 // eslint-disable-next-line no-restricted-imports
-import { unstable_Activity as Activity, Fragment } from "react";
+import { unstable_Activity as Activity } from "react";
 import { Root, createRoot } from "react-dom/client";
 import { act } from "react-dom/test-utils";
 import {
@@ -30,7 +30,7 @@ describe("PanelGroup", () => {
   }
 
   beforeEach(() => {
-    // @ts-expect-error
+    // @ts-expect-error global.IS_REACT_ACT_ENVIRONMENT is not typed
     global.IS_REACT_ACT_ENVIRONMENT = true;
 
     // JSDom doesn't support element sizes
@@ -232,7 +232,7 @@ describe("PanelGroup", () => {
   describe("callbacks", () => {
     describe("onLayout", () => {
       it("should be called with the initial group layout on mount", () => {
-        let onLayout = jest.fn();
+        const onLayout = jest.fn();
 
         act(() => {
           root.render(
@@ -249,9 +249,9 @@ describe("PanelGroup", () => {
       });
 
       it("should be called any time the group layout changes", () => {
-        let onLayout = jest.fn();
-        let panelGroupRef = createRef<ImperativePanelGroupHandle>();
-        let panelRef = createRef<ImperativePanelHandle>();
+        const onLayout = jest.fn();
+        const panelGroupRef = createRef<ImperativePanelGroupHandle>();
+        const panelRef = createRef<ImperativePanelHandle>();
 
         act(() => {
           root.render(

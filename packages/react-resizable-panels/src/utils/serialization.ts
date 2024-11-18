@@ -2,15 +2,11 @@ import { PanelData } from "../Panel";
 import { PanelGroupStorage } from "../PanelGroup";
 
 export type PanelConfigurationState = {
-  expandToSizes: {
-    [panelId: string]: number;
-  };
+  expandToSizes: Record<string, number>;
   layout: number[];
 };
 
-export type SerializedPanelGroupState = {
-  [panelIds: string]: PanelConfigurationState;
-};
+export type SerializedPanelGroupState = Record<string, PanelConfigurationState>;
 
 function getPanelGroupKey(autoSaveId: string): string {
   return `react-resizable-panels:${autoSaveId}`;
@@ -44,12 +40,12 @@ function loadSerializedPanelGroupState(
     const panelGroupKey = getPanelGroupKey(autoSaveId);
     const serialized = storage.getItem(panelGroupKey);
     if (serialized) {
-      const parsed = JSON.parse(serialized);
+      const parsed = JSON.parse(serialized) as unknown;
       if (typeof parsed === "object" && parsed != null) {
         return parsed as SerializedPanelGroupState;
       }
     }
-  } catch (error) {}
+  } catch (_) {}
 
   return null;
 }
