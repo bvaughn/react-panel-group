@@ -99,5 +99,5 @@ export function setGlobalCursorStyle(
     document.head.appendChild(styleElement);
   }
 
-  styleElement.innerHTML = `*{cursor: ${style}!important;}`;
+  styleElement.sheet?.insertRule(`*{cursor: ${style}!important;}`)
 }
